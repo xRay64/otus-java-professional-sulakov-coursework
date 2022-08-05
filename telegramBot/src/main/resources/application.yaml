@@ -1,0 +1,20 @@
+exchangeservice:
+  host: http://exchange_service:9900
+  path: /usd_ru_best_rate
+  password: securityPass
+
+spring:
+  datasource:
+    url: jdbc:postgresql://bot_postgress:5433/telegram_bot
+    username: sulakov
+    password: Ant1989_Sul
+
+  liquibase:
+    enabled: true
+
+logging:
+  level:
+    root: INFO
+    ru.sulakov.telegrambot.service.ExchangeInfoService: DEBUG
+    ru.sulakov.telegrambot.bot.MyAbilityBot: DEBUG
+    org.springframework.jdbc.core.JdbcTemplate: TRACE
