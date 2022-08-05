@@ -38,7 +38,7 @@ public class ExchangeServlet extends HttpServlet {
             resp.setCharacterEncoding("UTF8");
             resp.getWriter().println(gson.toJson(bestExchangeRates));
         } else {
-            resp.sendError(401);
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 }

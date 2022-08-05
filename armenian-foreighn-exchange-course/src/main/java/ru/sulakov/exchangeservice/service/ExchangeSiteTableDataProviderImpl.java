@@ -15,9 +15,7 @@ public class ExchangeSiteTableDataProviderImpl implements ExchangeSiteTableDataP
             Document document = Jsoup.connect(uri).get();
             tableRows =
                     document.select("table#rb").get(0).child(0).children();
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException in getPageTableRowsElements()");
-        } catch (IOException e) {
+        } catch (NullPointerException | IOException e) {
             throw new SiteDataGetException(e);
         }
         return tableRows;
