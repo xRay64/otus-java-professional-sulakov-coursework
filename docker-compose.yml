@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  app:
+    image: raycheg/telegram_bot:0.1
+    container_name: bot_service
+    depends_on:
+      - db
+      - exchange_service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/telegram_bot
+      - SPRING_DATASOURCE_USERNAME=sulakov
+      - SPRING_DATASOURCE_PASSWORD=
+      - EXCHANGESERVICE_HOST=http://exchange_service:9900
+      - EXCHANGESERVICE_PATH=/usd_ru_best_rate
+      - EXCHANGESERVICE_PASSWORD=securityPass
+      - BOT_NAME=AntonTestBot
+      - BOT_TOKEN=
+
+  db:
+    image: postgres
+    container_name: bot_postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=sulakov
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=telegram_bot
+
+  exchange_service:
+    image: raycheg/exchange-service:0.2
+    container_name: exchange_service
+    ports:
+      - "9900:9900"
